@@ -113,7 +113,10 @@ brew install --cask \
     alt-tab \
     stats \
     hiddenbar \
-    keka
+    keka \
+    obsidian \
+    1password \
+    1password-cli
 
 # 이미 유료 사용 중인 앱 (App Store 또는 공식 사이트에서 설치)
 # - Magnet (App Store 유료) → 창 관리
@@ -133,14 +136,47 @@ npm install -g @anthropic-ai/claude-code
 npm install -g @openai/codex
 ```
 
-### 2-3. Docker Desktop (별도)
+### 2-3. pkg 인스톨러 방식 앱 (sudo 필요, 별도 설치)
 
-> Docker Desktop은 설치 중 `/usr/local/cli-plugins`를 만들기 위해 **sudo 권한**을 요구합니다. 비대화형(스크립트/CI)에서는 설치가 실패하므로 대화형 셸에서 직접 실행하고 로그인 비밀번호를 입력해야 합니다.
+> 아래 앱들은 `.dmg`가 아니라 `.pkg` 인스톨러로 배포됩니다. `/usr/sbin/installer` 실행 시 **sudo 비밀번호**를 요구해, 비대화형 셸(스크립트/CI/에이전트)에서는 설치가 실패합니다. **대화형 터미널에서 직접 실행**하고 macOS 로그인 비밀번호를 입력해야 합니다.
+>
+> sudo 타임스탬프가 5분 유지되므로 아래처럼 한 줄로 연쇄 설치하면 비밀번호를 한 번만 입력하면 됩니다.
 
 ```bash
-brew install --cask docker-desktop
-# 설치 후 Docker.app을 한 번 실행해 라이선스 동의 완료
+brew install --cask \
+    docker-desktop \
+    microsoft-office \
+    microsoft-teams
 ```
+
+**주의사항**
+- **Docker Desktop**: 설치 후 `Docker.app`을 한 번 실행해 라이선스 동의 완료. 그 전까지 `docker` CLI는 데몬 연결 실패.
+- **Microsoft Office 번들 구성**: `microsoft-office` cask는 **Word / Excel / PowerPoint / Outlook / OneNote + OneDrive** 6개 앱을 한 번에 설치합니다.
+  - **OneDrive는 Office 번들에 포함**되어 있어 별도 `onedrive` cask를 설치하면 `Cask 'onedrive' conflicts with 'microsoft-office'` 에러가 납니다. 중복 설치하지 마세요.
+  - **Outlook도 번들에 포함**이라 별도 `microsoft-outlook` cask 불필요.
+- **Microsoft 365 구독 필요**: brew는 설치 파일만 가져옵니다. 첫 실행 시 Microsoft 계정 로그인을 하고 구독이 연결돼야 Word 등이 풀 기능으로 동작합니다. 구독 없으면 읽기 전용 모드.
+- **Teams는 별도 cask**: Office 번들에 포함 안 됨.
+
+### 2-4. App Store 전용 앱 (mas CLI)
+
+> 일부 앱은 App Store에서만 배포됩니다. `mas` CLI로 터미널 설치 스크립트에 포함시킬 수 있지만, **App Store.app에 Apple ID GUI 로그인이 선행돼야** 작동합니다 (mas 자체로 로그인 불가).
+
+```bash
+# mas CLI 설치
+brew install mas
+
+# Apple ID 로그인은 App Store.app을 한 번 열어 GUI로 진행 (필수)
+
+# App Store 앱 설치 (이미 구매·확보한 상태여야 함)
+mas install 441258766   # Magnet — 창 관리, 유료 (재설치 시 구매 이력으로 무료)
+mas install 1055511498  # Day One — 저널, 무료 (구독 별도)
+```
+
+**대안/주의사항**
+- **Magnet 대안**: 무료 오픈소스 대체재 [Rectangle](https://rectangleapp.com/)이 있습니다. `brew install --cask rectangle`로 설치 가능하고 기능이 거의 동일해 Magnet에서 이관하는 사람이 많습니다.
+- **Day One은 App Store 권장**: 직접 다운로드/다른 경로 설치 시 iCloud 동기화·Premium 구독이 Apple ID와 꼬여 문제가 생길 수 있습니다.
+- **`mas purchase`는 비활성화**: 처음 구매는 반드시 App Store GUI에서. `mas install`은 "이미 구매·확보된 앱의 재설치"에만 동작합니다.
+- **확인**: `mas list`로 현재 App Store 경로로 설치된 앱 목록 확인.
 
 ---
 

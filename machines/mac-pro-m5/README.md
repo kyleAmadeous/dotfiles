@@ -24,12 +24,17 @@ Mac Pro M5 · macOS · 워크스테이션
 - gcloud SDK: `CLOUDSDK_PYTHON=/opt/homebrew/bin/python3.13` (번들 Python 3.9 deprecation 우회)
 
 **GUI 앱 (brew cask)**
-- 개발: Visual Studio Code, iTerm2, Warp
+- 개발: Visual Studio Code, iTerm2, Warp, Docker Desktop
 - 브라우저: Google Chrome
 - 유틸: Alfred 5, AltTab, Stats, Hidden Bar, Keka
+- 생산성: Obsidian, 1Password (+ `op` CLI)
 - AI: Claude, ChatGPT
 - 스토리지: Dropbox
-- (대기: Docker Desktop — sudo 필요해서 수동 설치)
+- Microsoft 365 (Word / Excel / PowerPoint / Outlook / OneNote / OneDrive 번들) + Teams
+
+**GUI 앱 (App Store)**
+- Magnet — 창 관리
+- Day One — 저널
 
 **폰트**
 - Powerlevel10k용 `MesloLGS NF` 4종 (romkatv 공식 배포)
@@ -45,6 +50,12 @@ Mac Pro M5 · macOS · 워크스테이션
 
 ## 수동 작업 필요
 
-- `brew install --cask docker-desktop` (sudo 비밀번호 요구)
 - `gcloud init` (브라우저 OAuth)
-- P10k 마법사는 1회 완료됨 (`~/.p10k.zsh` 존재)
+- Microsoft 365 구독 계정으로 Office 앱 첫 실행 시 로그인
+- OneDrive/Dropbox 동기화 폴더 설정
+- 1Password vault 로그인 및 브라우저 확장 연결
+
+## 완료된 설정
+
+- P10k 마법사 (`~/.p10k.zsh` 존재)
+- Docker Desktop 설치 완료
