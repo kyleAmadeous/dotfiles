@@ -146,7 +146,8 @@ npm install -g @openai/codex
 brew install --cask \
     docker-desktop \
     microsoft-office \
-    microsoft-teams
+    microsoft-teams \
+    logi-options+
 ```
 
 **주의사항**
@@ -156,6 +157,13 @@ brew install --cask \
   - **Outlook도 번들에 포함**이라 별도 `microsoft-outlook` cask 불필요.
 - **Microsoft 365 구독 필요**: brew는 설치 파일만 가져옵니다. 첫 실행 시 Microsoft 계정 로그인을 하고 구독이 연결돼야 Word 등이 풀 기능으로 동작합니다. 구독 없으면 읽기 전용 모드.
 - **Teams는 별도 cask**: Office 번들에 포함 안 됨.
+- **Logi Options+** (MX Master / MX Keys / MX Anywhere 등 Logitech 주변기기 설정 앱):
+  - Cask 이름은 `logi-options+` (플러스 기호 포함). `logi-options-plus`로 쳐도 Homebrew가 리디렉트해주지만 정식 표기는 `+`.
+  - 구버전 **Logitech Options**(`logitech-options`)와 혼동 금지. MX Master 3S 같은 신형 장치는 Options+ 전용. 구버전 설치 시 8K DPI 센서·정숙 클릭 등 신기능 제어 불가.
+  - 설치 로그 중 `Boot-out failed: 5: Input/output error` / `Bootstrap failed: 5: Input/output error` / `feature_flags_loader.cpp: features_cache.json does not exist` 메시지는 **최초 설치 시 정상**입니다. 기존 launchd 에이전트가 없어 `launchctl boot-out`이 대상 없음으로 실패하고, feature cache는 첫 실행 때 생성되기 때문. 마지막에 `🍺  logi-options+ was successfully installed!`가 찍혔다면 성공.
+  - Caveats에 `You must reboot for the installation of logi-options+ to take effect.`가 나옴 — **반드시 재부팅** 후 `open -a logioptionsplus`로 실행.
+  - 재부팅 후 `시스템 설정 → 개인정보 보호 및 보안`에서 Logi Options+에 **입력 모니터링 / 손쉬운 사용 / Bluetooth** 권한을 부여해야 마우스 버튼 커스텀·제스처·스크롤 제어가 동작합니다. 권한 누락이 "설치했는데 버튼 설정이 안 먹는다" 증상의 99% 원인.
+  - 완전 제거 시 `brew uninstall --zap --cask logi-options+`를 써야 `~/Library/Application Support/LogiOptionsPlus`, `~/Library/LaunchAgents/com.logi.optionsplus*` 잔재까지 정리됩니다.
 
 ### 2-4. App Store 전용 앱 (mas CLI)
 
