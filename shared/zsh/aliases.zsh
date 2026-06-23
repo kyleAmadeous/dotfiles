@@ -28,3 +28,6 @@ alias gb='git branch'
 
 # Editor
 alias c='code'
+
+# Local LLM (mlx-lm 엔진 → OpenAI 호환 @ localhost:8080)
+alias qwen-server='mlx_lm.server --model mlx-community/Qwen3-Coder-30B-A3B-Instruct-4bit-dwq-v2 --port 8080'

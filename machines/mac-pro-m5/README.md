@@ -21,6 +21,8 @@ Mac Pro M5 · macOS · 워크스테이션
 **런타임**
 - Node.js: nvm → v24 LTS (`nvm alias default lts/*`)
 - Python: pyenv (시스템 Python 3.9는 그대로 두고 pyenv로 버전 관리)
+- .NET: `dotnet-sdk@8` (LTS) + `dotnet-ef` global tool
+- pnpm: corepack 활성화 (`tableGame-next` 모노레포용)
 - gcloud SDK: `CLOUDSDK_PYTHON=/opt/homebrew/bin/python3.13` (번들 Python 3.9 deprecation 우회)
 
 **GUI 앱 (brew cask)**
@@ -31,6 +33,10 @@ Mac Pro M5 · macOS · 워크스테이션
 - AI: Claude, ChatGPT
 - 스토리지: Dropbox
 - Microsoft 365 (Word / Excel / PowerPoint / Outlook / OneNote / OneDrive 번들) + Teams
+
+**AI CLI (npm global)**
+- Claude Code — `@anthropic-ai/claude-code`
+- OpenAI Codex — `@openai/codex`
 
 **GUI 앱 (App Store)**
 - Magnet — 창 관리

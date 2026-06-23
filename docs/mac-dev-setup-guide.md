@@ -97,7 +97,11 @@ brew install \
 
 # 언어 버전 관리
 brew install pyenv
-# nvm은 아래 섹션 5 참고 (brew 버전은 비공식 지원)
+# nvm은 아래 섹션 4 참고 (brew 버전은 비공식 지원)
+
+# 패키지 매니저 (pnpm — tableGame-next 모노레포용)
+corepack enable
+corepack prepare pnpm@latest --activate
 
 # 클라우드 CLI
 brew install awscli azure-cli
@@ -297,6 +301,40 @@ command -v pyenv >/dev/null && eval "$(pyenv init - zsh)"
 export CLOUDSDK_PYTHON="/opt/homebrew/bin/python3.13"
 ```
 
+### 4-4. .NET 8.0 SDK
+
+> .NET 8은 LTS(장기 지원) 버전. `dotnet-sdk@8` cask는 `.pkg` 인스톨러로 배포되어 **sudo 비밀번호**가 필요합니다.
+
+```bash
+brew install --cask dotnet-sdk@8
+```
+
+**설치 확인**:
+
+```bash
+dotnet --list-sdks
+# 8.0.4xx 버전이 출력되면 정상
+
+dotnet --version
+# 8.0.xxx
+```
+
+**EF Core CLI** (Entity Framework 마이그레이션 도구):
+
+```bash
+# .NET SDK 설치 후 실행
+dotnet tool install --global dotnet-ef
+
+# 설치 확인
+dotnet ef --version
+```
+
+**주의사항**
+- `dotnet-sdk@8`은 `.pkg` 인스톨러 방식이라 섹션 2-3의 앱들과 동일하게 **대화형 터미널에서 직접 실행** 필요.
+- 최신 버전(.NET 9)이 필요하면 `brew install --cask dotnet-sdk`로 별도 설치 가능. 여러 SDK 버전이 공존 가능하며, 프로젝트의 `global.json`으로 버전을 고정합니다.
+- Apple Silicon(M1/M2/M3/M4/M5) 네이티브 지원. Rosetta 불필요.
+- `dotnet-ef`는 `dotnet tool update --global dotnet-ef`로 업데이트. 프로젝트의 EF Core 패키지 버전과 맞춰야 마이그레이션 오류가 나지 않습니다.
+
 ---
 
 ## 5. dotfiles 레포 연결
@@ -355,7 +393,7 @@ DOTFILES="$HOME/devsrc/dotfiles"
 
 ```bash
 # 새 셸에서 핵심 도구 확인
-for t in node npm pyenv gcloud aws az bat eza nvim fzf fd btop; do
+for t in node npm pnpm pyenv dotnet gcloud aws az bat eza nvim fzf fd btop; do
     printf "%-8s " $t
     command -v $t >/dev/null && echo OK || echo MISSING
 done
