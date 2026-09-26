@@ -1,4 +1,4 @@
-<!-- ai-instructions-version: 2026.09.26-2 | history: git log -- shared/ai (dotfiles) -->
+<!-- ai-instructions-version: 2026.09.26-3 | history: git log -- shared/ai (dotfiles) -->
 # Working agreements
 
 - Follow the requested scope through implementation, relevant verification, and fixes caused by the change. Do not stop for routine intermediate approval. Keep read-only requests read-only.
@@ -31,7 +31,4 @@
 
 ## Design decisions across tools
 
-- For new UI or substantial visual changes, start from the user's task, existing brand/system, target devices and acceptance criteria. Review relevant design/technology candidates; treat trends as options, not required features or a style quota. Small fixes need only relevant checks.
-- Choose available design and generation skills by capability in the active session; Codex and Claude may expose different skills. Keep one brief and one primary design owner per deliverable, reuse existing planning/implementation/verification, and allow better alternatives with a clear reason. A skill or model update alone is not evidence of improved quality.
-- Connect adopted design decisions to generation inputs or implementation requirements and observable evaluation criteria before producing candidates. Assess static assets separately from working UI; reuse evidence in the existing task evaluation and repair only affected parts within its limits. Do not add product features, external effects or a second retry loop merely to follow a trend.
-- Keep changing design candidates and technical support facts in task-relevant references, with sources and verification dates; verify selected unstable facts when needed. Record the guidance and tool/model versions when available, preserve accepted criteria during a task, and compare meaningful upgrades on representative work rather than retesting every update.
+- For new UI or substantial visual changes, follow the design-decisions reference in the taskgraph-solo/taskgraph-orca skills: one brief and one primary design owner per deliverable, skills chosen from what the active session actually exposes (Codex and Claude differ), trends as optional candidates, and evaluation and repair inside the existing task limits. Small fixes need only relevant checks.
