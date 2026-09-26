@@ -379,6 +379,25 @@ AI 지침 수정 규칙:
 - 여러 세션(Codex·Claude)이 동시에 수정하면 늦게 merge하는 쪽이 main을 먼저 반영하고 버전을 다시 올린다.
 - 다른 머신에서는 `git -C ~/devsrc/dotfiles pull` 후 **새 세션**부터 적용된다.
 
+미디어 생성 표준은 Higgsfield다(Codex·Claude 공통, 2026-09-26 결정). 계정 로그인이 필요하고, 생성할 때 유료 credits를 쓴다.
+
+```bash
+# 1) Higgsfield skills를 ~/.agents/skills에 설치한다(Codex가 읽는 위치)
+npx skills add higgsfield-ai/skills -g
+# 2) Claude Code에 같은 사본을 연결한다
+for d in ~/.agents/skills/higgsfield-*; do
+  n=$(basename "$d")
+  [ -e ~/.claude/skills/$n ] || ln -s "$d" ~/.claude/skills/$n
+done
+# 3) Claude MCP를 추가한다. 로그인은 Claude Code에서 /mcp → higgsfield
+claude mcp add --transport http --scope user higgsfield https://mcp.higgsfield.ai/mcp
+# 3') Codex MCP는 ~/.codex/config.toml에 추가한다
+#   [mcp_servers.higgsfield]
+#   url = "https://mcp.higgsfield.ai/mcp"
+```
+
+> skills는 Higgsfield CLI(`higgsfield`)를 호출한다. CLI 설치와 로그인은 Higgsfield 공식 안내를 따르고, `higgsfield account status`로 로그인 상태를 확인한다. kyle-creative/asset-gen, Canva, 호스트 내장 이미지 생성은 작업에서 명시했을 때만 쓴다.
+
 > **주의**: `~/.gitconfig`가 레포 파일을 가리키는 symlink 상태에서 `git config --global ...`을 실행하면 레포 파일이 **직접 수정**됩니다. 특히 쉘이 `~`를 절대경로로 확장해 넣어버리면 다른 머신에서 깨집니다. 레포 `.gitconfig`에서 경로는 항상 `~/...` 또는 `$HOME` 상대로 유지.
 
 ### 5-3. ~/.zshrc 엔트리포인트 패턴
