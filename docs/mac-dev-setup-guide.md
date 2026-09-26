@@ -371,6 +371,14 @@ ln -sf $DOT/shared/ai/CLAUDE.md  ~/.claude/CLAUDE.md
 
 > `CLAUDE.md`는 `@~/.codex/AGENTS.md`로 공통 지침을 불러온다(symlink 위치와 무관하게 홈 기준 경로). 지침은 새 세션부터 적용된다. `CLAUDE.md`가 참조하는 `~/.claude/agents/reviewer.md`, `AGENTS.md`가 참조하는 `~/.codex/agents/*.toml`은 이 레포에 포함되지 않으므로 필요하면 머신별로 준비한다.
 
+AI 지침 수정 규칙:
+
+- 원본은 이 레포의 `shared/ai/`다. 각 머신의 `~/.codex/AGENTS.md`, `~/.claude/CLAUDE.md`는 symlink이므로 **직접 수정하지 않는다**. symlink 상태에서 편집하면 레포 파일이 브랜치·PR 없이 바뀐다.
+- 브랜치에서 수정하고 PR로 merge한다. 이력은 `git log -- shared/ai`로 추적한다.
+- 수정할 때마다 두 파일 첫 줄의 `ai-instructions-version`을 올린다(`YYYY.MM.DD-N`). 두 파일은 같은 버전을 쓴다.
+- 여러 세션(Codex·Claude)이 동시에 수정하면 늦게 merge하는 쪽이 main을 먼저 반영하고 버전을 다시 올린다.
+- 다른 머신에서는 `git -C ~/devsrc/dotfiles pull` 후 **새 세션**부터 적용된다.
+
 > **주의**: `~/.gitconfig`가 레포 파일을 가리키는 symlink 상태에서 `git config --global ...`을 실행하면 레포 파일이 **직접 수정**됩니다. 특히 쉘이 `~`를 절대경로로 확장해 넣어버리면 다른 머신에서 깨집니다. 레포 `.gitconfig`에서 경로는 항상 `~/...` 또는 `$HOME` 상대로 유지.
 
 ### 5-3. ~/.zshrc 엔트리포인트 패턴
