@@ -27,6 +27,7 @@ dotfiles/
 ├── shared/            # 공통 설정
 │   ├── zsh/           # aliases.zsh
 │   ├── git/           # .gitconfig, .gitignore_global
+│   ├── ai/            # AGENTS.md (Codex·Claude 공통 지침), CLAUDE.md (Claude Code 전역 지침)
 │   └── vim/           # init.vim
 └── docs/              # 설정 가이드
     ├── windows-dev-setup-guide.md
@@ -45,5 +46,6 @@ dotfiles/
 
 ## 업데이트 이력
 
+- 2026-09-26: AI 에이전트 전역 지침(`shared/ai/`) 추가 — `~/.codex/AGENTS.md`, `~/.claude/CLAUDE.md` symlink
 - 2026-04-05: dotfiles 구조 개편 (machines/shared 분리)
 - 2026-04-04: 초기 생성

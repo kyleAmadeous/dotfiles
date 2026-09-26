@@ -358,6 +358,19 @@ ln -sf $DOT/shared/git/.gitignore_global  ~/.gitignore_global
 ln -sf $DOT/shared/vim/init.vim           ~/.config/nvim/init.vim
 ```
 
+AI 에이전트 전역 지침 (Codex·Claude Code 공통). 기존 파일이 있으면 먼저 백업하고 내용을 비교한다:
+
+```bash
+mkdir -p ~/.codex ~/.claude
+for f in ~/.codex/AGENTS.md ~/.claude/CLAUDE.md; do
+  [ -f "$f" ] && [ ! -L "$f" ] && cp "$f" "$f.bak-$(date +%Y%m%d)"
+done
+ln -sf $DOT/shared/ai/AGENTS.md  ~/.codex/AGENTS.md
+ln -sf $DOT/shared/ai/CLAUDE.md  ~/.claude/CLAUDE.md
+```
+
+> `CLAUDE.md`는 `@~/.codex/AGENTS.md`로 공통 지침을 불러온다(symlink 위치와 무관하게 홈 기준 경로). 지침은 새 세션부터 적용된다. `CLAUDE.md`가 참조하는 `~/.claude/agents/reviewer.md`, `AGENTS.md`가 참조하는 `~/.codex/agents/*.toml`은 이 레포에 포함되지 않으므로 필요하면 머신별로 준비한다.
+
 > **주의**: `~/.gitconfig`가 레포 파일을 가리키는 symlink 상태에서 `git config --global ...`을 실행하면 레포 파일이 **직접 수정**됩니다. 특히 쉘이 `~`를 절대경로로 확장해 넣어버리면 다른 머신에서 깨집니다. 레포 `.gitconfig`에서 경로는 항상 `~/...` 또는 `$HOME` 상대로 유지.
 
 ### 5-3. ~/.zshrc 엔트리포인트 패턴
