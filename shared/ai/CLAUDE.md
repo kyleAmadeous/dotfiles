@@ -1,3 +1,4 @@
+<!-- ai-instructions-version: 2026.09.26-1 | history: git log -- shared/ai (dotfiles) -->
 # Shared working agreements
 
 @~/.codex/AGENTS.md

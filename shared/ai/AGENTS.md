@@ -1,3 +1,4 @@
+<!-- ai-instructions-version: 2026.09.26-1 | history: git log -- shared/ai (dotfiles) -->
 # Working agreements
 
 - Follow the requested scope through implementation, relevant verification, and fixes caused by the change. Do not stop for routine intermediate approval. Keep read-only requests read-only.
