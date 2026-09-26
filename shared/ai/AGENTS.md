@@ -1,4 +1,4 @@
-<!-- ai-instructions-version: 2026.09.26-1 | history: git log -- shared/ai (dotfiles) -->
+<!-- ai-instructions-version: 2026.09.26-2 | history: git log -- shared/ai (dotfiles) -->
 # Working agreements
 
 - Follow the requested scope through implementation, relevant verification, and fixes caused by the change. Do not stop for routine intermediate approval. Keep read-only requests read-only.
@@ -28,3 +28,10 @@
 - Use an independent Reviewer for changes with substantial security, permission, data-loss, concurrency, or hard-to-verify risk. Require concrete findings and relevant verification; review alone is not proof of completion. Follow project-specific required reviews and gates.
 - Role files in `~/.codex/agents/{explorer,worker,reviewer}.toml` are optional presets. If the current spawn tool has no role selector, read only the chosen role file and put its instructions in the task message and explicitly select the model and reasoning as needed. Do not claim the preset was loaded.
 - Keep one coherent task in one main session. Record durable decisions concisely in project documents; start unrelated goals separately. Avoid repeated investigation or verification when existing evidence still applies. Concurrency limits are not token budgets, and delegation does not guarantee token savings.
+
+## Design decisions across tools
+
+- For new UI or substantial visual changes, start from the user's task, existing brand/system, target devices and acceptance criteria. Review relevant design/technology candidates; treat trends as options, not required features or a style quota. Small fixes need only relevant checks.
+- Choose available design and generation skills by capability in the active session; Codex and Claude may expose different skills. Keep one brief and one primary design owner per deliverable, reuse existing planning/implementation/verification, and allow better alternatives with a clear reason. A skill or model update alone is not evidence of improved quality.
+- Connect adopted design decisions to generation inputs or implementation requirements and observable evaluation criteria before producing candidates. Assess static assets separately from working UI; reuse evidence in the existing task evaluation and repair only affected parts within its limits. Do not add product features, external effects or a second retry loop merely to follow a trend.
+- Keep changing design candidates and technical support facts in task-relevant references, with sources and verification dates; verify selected unstable facts when needed. Record the guidance and tool/model versions when available, preserve accepted criteria during a task, and compare meaningful upgrades on representative work rather than retesting every update.
