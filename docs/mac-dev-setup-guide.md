@@ -398,6 +398,12 @@ claude mcp add --transport http --scope user higgsfield https://mcp.higgsfield.a
 
 > skills는 Higgsfield CLI(`higgsfield`)를 호출한다. CLI 설치와 로그인은 Higgsfield 공식 안내를 따르고, `higgsfield account status`로 로그인 상태를 확인한다. kyle-creative/asset-gen, Canva, 호스트 내장 이미지 생성은 작업에서 명시했을 때만 쓴다.
 
+> **Orca가 띄우는 Codex**는 계정별 CODEX_HOME(`~/Library/Application Support/orca/codex-accounts/<id>/home`)을 쓴다(2026-09-26 확인).
+> - `AGENTS.md`는 `~/.codex/AGENTS.md`로 연결되어 있다. 그래서 공통 지침이 그대로 적용된다.
+> - `config.toml`은 `~/.codex/config.toml`과 별개다. `[mcp_servers.higgsfield]`가 있는지 따로 확인한다.
+> - skill은 `~/.agents/skills`와 자체 `skills/.system`만 읽고, `~/.codex/skills`는 읽지 않는다. 그래서 Codex용 skill(taskgraph 포함)은 `~/.agents/skills`에 설치한다. taskgraph 설치 방법은 taskgraph-lab `docs/usage/new-mac-setup.md` §2를 따른다.
+> - 적용 여부는 실제 Orca Codex worker 세션에서 확인한다.
+
 > **주의**: `~/.gitconfig`가 레포 파일을 가리키는 symlink 상태에서 `git config --global ...`을 실행하면 레포 파일이 **직접 수정**됩니다. 특히 쉘이 `~`를 절대경로로 확장해 넣어버리면 다른 머신에서 깨집니다. 레포 `.gitconfig`에서 경로는 항상 `~/...` 또는 `$HOME` 상대로 유지.
 
 ### 5-3. ~/.zshrc 엔트리포인트 패턴
