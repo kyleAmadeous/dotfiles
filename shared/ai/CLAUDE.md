@@ -1,4 +1,4 @@
-<!-- ai-instructions-version: 2026.09.26-3 | history: git log -- shared/ai (dotfiles) -->
+<!-- ai-instructions-version: 2026.09.30-1 | history: git log -- shared/ai (dotfiles) -->
 # Shared working agreements
 
 @~/.codex/AGENTS.md
@@ -24,3 +24,12 @@ This section supersedes the provider-specific mechanics in the imported agreemen
 **Isolation.** A `tools:` allowlist is the only real restriction on a subagent; role wording alone enforces nothing, and an agent holding `Bash` can still write. Subagent definitions here omit `Agent` and `SendMessage`, so they cannot nest or reach peers. `isolation: "worktree"` creates a *temporary* worktree that is auto-cleaned when unchanged — useful for throwaway parallel work, wrong for branch-and-PR work, which keeps the named `~/devsrc/<repo>-wt/<branch-slug>/` worktrees from the shared agreements. One mutating owner per worktree; never let two agents edit the same files concurrently.
 
 **Concurrency** is capped by `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS` in `~/.claude/settings.json`. It is a parallelism limit, not a token budget, and delegation does not by itself save tokens.
+
+## Taskgraph provider delegation
+
+This is a standing user delegation for Taskgraph work only (`taskgraph-solo` / `taskgraph-orca` Runs); it does not apply to other conversations or to small edits made outside a Run.
+
+- **Coordinator:** the current Claude Code session (Opus) owns the Spec, Task split, integration, acceptance and final verification, and makes small, clear edits itself.
+- **Implementation:** Codex workers. Select the model and supported effort per Task from the Taskgraph Codex lanes, using `gpt-6.1-sol`, `gpt-6-astra` and `gpt-6-luna`; pass the selection explicitly and verify it from the rollout.
+- **Independent review:** a separate Claude session, not the Coordinator, using `claude-opus-5-5` or `claude-sonnet-5-5` per the review lane; planning and design judgement may use `claude-fable-5-1`.
+- Apply this within existing Task, Dispatch, Eval, time and cost limits without asking again. Explicit instructions in the request or project take precedence, and paid calibration or experiments still need their own approval.
