@@ -1,4 +1,4 @@
-<!-- ai-instructions-version: 2026.09.30-1 | history: git log -- shared/ai (dotfiles) -->
+<!-- ai-instructions-version: 2026.10.08-1 | history: git log -- shared/ai (dotfiles) -->
 # Working agreements
 
 - Follow the requested scope through implementation, relevant verification, and fixes caused by the change. Do not stop for routine intermediate approval. Keep read-only requests read-only.
@@ -7,6 +7,17 @@
 - Before editing a repository, inspect its current branch and status. Briefly state the intended outcome, affected area, and verification when this helps the user follow non-trivial work.
 - Run verification relevant to the changed behavior. Expand it for failures, shared impact, or explicit project gates; reuse valid results when the candidate has not changed.
 - Report the result, verification, and remaining limits. Distinguish implementation, tests, review, delivery, and merge when those stages apply.
+
+## Language and writing
+
+- Write everything the user reads in Korean that follows ASD-STE100: responses, reports, and items the user must decide.
+  - Write short sentences. Put one instruction in each sentence. Write procedures as numbered lists.
+  - Use the active voice and simple tenses.
+  - Use simple words. Always use the same term for the same thing.
+- Write technical terms in English when no common Korean term exists (for example merge, commit, worktree, rollback, CI). Use the common Korean term when one exists (for example 배포, 승인, 점검).
+- Keep code identifiers, file paths, and commands as they are.
+- Text that only agents read may be English: worker briefs, agent-facing documents, commit messages, and code comments.
+- Spell out an abbreviation such as AP or CX the first time it appears.
 
 ## Repositories under ~/devsrc
 
