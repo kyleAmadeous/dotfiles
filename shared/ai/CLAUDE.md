@@ -1,4 +1,4 @@
-<!-- ai-instructions-version: 2026.11.10-1 | history: git log -- shared/ai (dotfiles) -->
+<!-- ai-instructions-version: 2026.11.10-2 | history: git log -- shared/ai (dotfiles) -->
 # Shared working agreements
 
 @~/.codex/AGENTS.md
@@ -25,6 +25,7 @@ This section supersedes the provider-specific mechanics in the imported agreemen
 - Give Fable a fixed evidence bundle (screenshots, verified facts) and written criteria; it does not collect facts itself. Ask for issues with reasons, not a verdict. Its output informs a human decision and is never the sole gate; fact-check its factual claims with Opus or the implementation model.
 - An item that crosses the boundary (for example a placeholder whose visibility depends on IME composition) gets the Fable design first, then an Opus check of the technical conditions.
 - Fable costs about 2.5× Opus per token; keep it on short, judgment-heavy work.
+- Games (casual, slots): Fable takes game feel — win-tier and bonus anticipation presentation, reward/level-clear screens, onboarding friction, paytable/help and shop copy, whether monetization feels pushy. Opus takes RTP, volatility, reel strips, paytable values, difficulty curves and economy (by calculation or simulation), RNG, server-result/presentation consistency, balance and payment handling, and regulatory rules such as not presenting a win below the bet as a win or autoplay limits; a human makes the final regulatory call. Give Fable frame sequences, video or timing values for motion — a still frame cannot show feel — and confirm feel and fun by human playtest and metrics, not by Fable alone. Where presentation meets numbers (for example the bet multiple that triggers Big Win), Fable proposes the feel and Opus checks thresholds and rules; any Fable proposal that hides losses or encourages excessive play is rejected.
 
 **No peer-to-peer.** Agents communicate only with the session that spawned them. `SendMessage` is used solely to continue a subagent this session started, with its context intact — the equivalent of a Codex follow-up task, and the way to reuse the same worker for fixes to the same change. Do not address another session, a teammate, or a cloud session; do not create teams or spawn teammates. Agent teams stay unconfigured (they are opt-in through `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS`, so leave that variable unset rather than setting it to a falsy value).
 
