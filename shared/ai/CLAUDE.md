@@ -1,4 +1,4 @@
-<!-- ai-instructions-version: 2026.09.30-1 | history: git log -- shared/ai (dotfiles) -->
+<!-- ai-instructions-version: 2026.11.10-1 | history: git log -- shared/ai (dotfiles) -->
 # Shared working agreements
 
 @~/.codex/AGENTS.md
@@ -18,6 +18,13 @@ This section supersedes the provider-specific mechanics in the imported agreemen
 **Brief.** Every delegation states the goal, working directory, owned files, prohibited actions, relevant evidence, and completion checks.
 
 **Model and effort** come from the agent definition's frontmatter or the `model` parameter, whose values are the short aliases `sonnet` / `opus` / `haiku` / `fable` — full model IDs fail validation. Choose per role, complexity, and blast radius rather than inheriting the parent by default; implementation Sonnet or Opus, independent review and merge decisions Opus, product/copy/design judgement Fable.
+
+**Fable and Opus roles.** Split by how correctness is judged, not by difficulty. This is a working hypothesis from vendor positioning and use, not a measured result.
+- Fable: work judged by how a person sees or experiences it — product priorities, screen and flow design, empty/error/loading states, placeholder and other visible copy, qualitative review. Keep it out of code implementation and pass/fail gates.
+- Opus: work judged by verifiable conditions — data contracts, IME/sanitize/flag/concurrency design, test criteria, mechanical review and merge decisions.
+- Give Fable a fixed evidence bundle (screenshots, verified facts) and written criteria; it does not collect facts itself. Ask for issues with reasons, not a verdict. Its output informs a human decision and is never the sole gate; fact-check its factual claims with Opus or the implementation model.
+- An item that crosses the boundary (for example a placeholder whose visibility depends on IME composition) gets the Fable design first, then an Opus check of the technical conditions.
+- Fable costs about 2.5× Opus per token; keep it on short, judgment-heavy work.
 
 **No peer-to-peer.** Agents communicate only with the session that spawned them. `SendMessage` is used solely to continue a subagent this session started, with its context intact — the equivalent of a Codex follow-up task, and the way to reuse the same worker for fixes to the same change. Do not address another session, a teammate, or a cloud session; do not create teams or spawn teammates. Agent teams stay unconfigured (they are opt-in through `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS`, so leave that variable unset rather than setting it to a falsy value).
 
