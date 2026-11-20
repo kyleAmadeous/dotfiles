@@ -1,4 +1,4 @@
-<!-- ai-instructions-version: 2026.11.11-1 | history: git log -- shared/ai (dotfiles) -->
+<!-- ai-instructions-version: 2026.11.20-1 | history: git log -- shared/ai (dotfiles) -->
 # Shared working agreements
 
 @~/.codex/AGENTS.md
@@ -43,6 +43,6 @@ This is a standing user delegation for Taskgraph work only (`taskgraph-solo` / `
 - **Coordinator:** a Claude Code session on `claude-opus-5-5` by default owns the Spec, Task split, integration, acceptance and final verification, and makes small, clear edits itself. Fable (`claude-fable-5-2`) is the Coordinator only when I pick it for that Run with a reason in the Run brief; a session that itself runs Fable is not that choice.
 - **Long Orca+ Runs:** for an authorized `taskgraph-orca` execution Run (not read-only or planning-only work) with 3+ Tasks, 2+ concurrent workers, 2+ hours, or time the user says they will be away, decided before the Run is created: the current session becomes the todo manager, drafts the Spec, and places a Claude Coordinator on `claude-opus-5-5` (Fable only as above) with this session's effort in its own worktree without asking again; that Coordinator then owns the duties above. Both roles rotate themselves near their context threshold. The skill's `references/session-rotation.md` owns the details.
 - **Todo manager model:** the todo manager interprets my requests (unclear instructions, graphic change requests, missing items), so it runs Fable (`claude-fable-5-2`) when I start it on Fable or name Fable for that Run. This is a request-interpretation profile, not the Coordinator choice above: the Coordinator stays on `claude-opus-5-5`. `references/session-rotation.md` owns the intake and launch details.
-- **Implementation:** Codex workers. Select the model and supported effort per Task from the Taskgraph Codex lanes, using `gpt-6.1-sol`, `gpt-6-astra` and `gpt-6-luna`; pass the selection explicitly and verify it from the rollout.
+- **Implementation:** Codex workers. Select the model and supported effort per Task from the Taskgraph Codex lanes, using `gpt-6.2-sol`, `gpt-6.2-astra` and `gpt-6-luna` (the 2026-11-18 lane IDs; when the lanes move to new IDs, update this line in the same change); pass the selection explicitly and verify it from the rollout.
 - **Independent review:** a separate Claude session, not the Coordinator, using `claude-opus-5-5` or `claude-sonnet-5-5` per the review lane; planning and design judgement may use `claude-fable-5-2`.
 - Apply this within existing Task, Dispatch, Eval, time and cost limits without asking again. Explicit instructions in the request or project take precedence, and paid calibration or experiments still need their own approval.
